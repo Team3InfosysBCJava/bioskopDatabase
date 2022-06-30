@@ -1,55 +1,44 @@
 create type avail as enum('Y','N');
-CREATE TABLE IF NOT EXISTS public.Users(
-    user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS public.user(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nama varchar(100) not null,
     username varchar(50) not null,
-    email_id varchar(255) not null,
-    password varchar(255) not null,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+    email varchar(255) not null,
+    password varchar(255) not null
 );
 
-CREATE TABLE IF NOT EXISTS public.Films(
-  film_code INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS public.films(
+  film_code varchar(50) PRIMARY KEY,
   film_name varchar(50) NOT NULL,
-  airin public.avail not null default 'N',
-  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+  airing public.avail not null default 'N'
 ); 
 
 CREATE TABLE IF NOT EXISTS public.Seats (
-  seat_no INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  seat_available public.avail not null default 'N',
-  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+  seat_no varchar(50) PRIMARY KEY,
+  seat_available public.avail not null default 'N'
 );
 
-CREATE TABLE IF NOT EXISTS public.Studio (
-  studio_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  studio_name varchar(100) NOT NULL,
-  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+CREATE TABLE IF NOT EXISTS public.studio (
+  studio_id varchar(100) PRIMARY KEY,
+  studio_name varchar(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS public.Schedules (
+CREATE TABLE IF NOT EXISTS public.schedules (
   schedule_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  film_code INT NOT NULL,
+  film_code varchar(100) NOT NULL,
   tanggal_tayang date NOT NULL,
   jam_mulai time NOT NULL,
   jam_selesai time NOT NULL,
   harga_tiket varchar(100) NOT NULL,
-  FOREIGN KEY (film_code) REFERENCES public.Films(film_code),
-  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+  FOREIGN KEY (film_code) REFERENCES public.films(film_code)
 );
 
-CREATE TABLE IF NOT EXISTS public.Reservations (
-  seat_no INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  studio_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS public.reservations (
+  seat_no varchar(100) not null,
+  studio_id varchar(100) NOT NULL,
   user_id int NOT null,
   schedule_id int not null,
-  FOREIGN KEY (studio_id) REFERENCES public.Studio(studio_id),
-  foreign key (user_id) references public.Users(user_id),
-  foreign key (schedule_id) references public.Schedules(schedule_id),
-  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+  FOREIGN KEY (studio_id) REFERENCES public.studio(studio_id),
+  foreign key (user_id) references public.user(id),
+  foreign key (schedule_id) references public.schedules(schedule_id)
  );
