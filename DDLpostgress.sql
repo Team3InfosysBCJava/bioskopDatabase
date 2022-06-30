@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS public.films(
   airing public.avail not null default 'N'
 ); 
 
-CREATE TABLE IF NOT EXISTS public.Seats (
+CREATE TABLE IF NOT EXISTS public.seats (
   seat_no varchar(50) PRIMARY KEY,
-  seat_available public.avail not null default 'N'
+  seat_available public.avail not null default 'N',
 );
 
 CREATE TABLE IF NOT EXISTS public.studio (
@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS public.reservations (
   studio_id varchar(100) NOT NULL,
   user_id int NOT null,
   schedule_id int not null,
+  FOREIGN KEY (seat_no) REFERENCES public.seat(seat_no),
   FOREIGN KEY (studio_id) REFERENCES public.studio(studio_id),
   foreign key (user_id) references public.user(id),
   foreign key (schedule_id) references public.schedules(schedule_id)
