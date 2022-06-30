@@ -1,0 +1,51 @@
+CREATE TABLE IF NOT EXISTS "Project".public.Users(
+    user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username varchar(50) not null,
+    email_id varchar(255) not null,
+    password varchar(255) not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "Project".public.Films(
+    film_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name varchar(100) not null,
+    is_playing int not null default 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "Project".public.Seats(
+    seat_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    seat_number int not null,
+    studio_name varchar(50) not null,
+    is_available int not null default 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "Project".public.Schedules(
+    schedule_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    film_id int not null,
+    seat_id int not null,
+    price int not null,
+    date_show date not null,
+    show_start time not null,
+    show_end time not null,  
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    foreign key (film_id) REFERENCES Films(film_id),
+    foreign key (seat_id) REFERENCES Seats(seat_id)
+
+);
+
+CREATE TABLE IF NOT EXISTS "Project".public.Reservation(
+    reservation_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id int not null,
+    schedule_id int not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
+    foreign key (user_id) references Users(user_id),
+    foreign key (schedule_id) references Schedules(schedule_id)
+);
+
