@@ -17,6 +17,13 @@ CREATE TABLE IF NOT EXISTS "Project".public.Users(
     updated_at TIMESTAMP not null DEFAULT NOW()
 );
 
+--TRIGGER FOR AUTOMATIC UPDATE TIMESTAMP
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON Users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
 CREATE TABLE IF NOT EXISTS "Project".public.Films(
     film_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(100) not null,
@@ -24,6 +31,13 @@ CREATE TABLE IF NOT EXISTS "Project".public.Films(
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
+
+--TRIGGER FOR AUTOMATIC UPDATE TIMESTAMP
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON Films 
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 
 CREATE TABLE IF NOT EXISTS "Project".public.Seats(
     seat_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -33,6 +47,14 @@ CREATE TABLE IF NOT EXISTS "Project".public.Seats(
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
+
+
+--TRIGGER FOR AUTOMATIC UPDATE TIMESTAMP
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON Seats
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 
 CREATE TABLE IF NOT EXISTS "Project".public.Schedules(
     schedule_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -49,6 +71,14 @@ CREATE TABLE IF NOT EXISTS "Project".public.Schedules(
 
 );
 
+
+--TRIGGER FOR AUTOMATIC UPDATE TIMESTAMP
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON Schedules
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
 CREATE TABLE IF NOT EXISTS "Project".public.Reservation(
     reservation_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id int not null,
@@ -61,22 +91,6 @@ CREATE TABLE IF NOT EXISTS "Project".public.Reservation(
 
 --TRIGGER FOR AUTOMATIC UPDATE TIMESTAMP
 CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON films 
+BEFORE UPDATE ON Reservation
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
-
---DATA SEEDING
-INSERT INTO Films (name, is_playing) 
-VALUES('American Pie', 0) RETURNING *;
-
-INSERT INTO Films (name, is_playing) 
-VALUES('Cinta Fitri', 0) RETURNING *;
-
---TESTING AUTO-UPDATE TRIGGER
-UPDATE Films 
-SET name = 'cinta Fitri 3' 
-WHERE film_id = 2 returning *;
-
-
-
-
