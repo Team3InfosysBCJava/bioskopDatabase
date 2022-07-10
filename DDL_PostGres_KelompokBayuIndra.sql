@@ -27,7 +27,7 @@ EXECUTE PROCEDURE trigger_set_timestamp();
 CREATE TABLE IF NOT EXISTS "Project".public.Films(
     film_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(100) not null,
-    is_playing int not null default 0,
+    is_playing boolean not null default false,
 	created_at TIMESTAMP not null DEFAULT NOW(),
     updated_at TIMESTAMP not null DEFAULT NOW()
 );
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "Project".public.Seats(
     seat_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     seat_number int not null,
     studio_name varchar(50) not null,
-    is_available int not null default 0,
+    is_available boolean not null default false,
 	created_at TIMESTAMP not null DEFAULT NOW(),
     updated_at TIMESTAMP not null DEFAULT NOW()
 );
