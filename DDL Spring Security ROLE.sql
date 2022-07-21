@@ -10,8 +10,8 @@ $$ LANGUAGE plpgsql;
 --DDL DATABASE TABLES
 CREATE TABLE IF NOT EXISTS "Project".public.Users(
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username varchar(50) not null,
-    email_id varchar(255) not null,
+    username varchar(50) not null unique,
+    email_id varchar(255) not null unique,
     password varchar(255) not null,
     roles varchar(255) default 'ROLE_USER',
     created_at TIMESTAMP not null DEFAULT NOW(),
