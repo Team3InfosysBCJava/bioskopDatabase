@@ -1,11 +1,16 @@
-INSERT INTO "Project".public.Users(username,email_id,password, roles)
+INSERT INTO public.Users(username,email_id,password, roles)
 VALUES
     ('Wahyu Wijanarko','WahyuW@gmail.com','Rahasiaaaa4x', 'ROLE_ADMIN'),
 	('Sri Mulyani','S_Mulyani@gmail.com','Inip45sword', 'ROLE_ADMIN'),
 	('Budi Setiawan','BudiW@gmail.com','inipasword123', 'ROLE_ADMIN'),
-	('Nur Aida','Aida_Nur@gmail.com','123456aaaa', 'ROLE_ADMIN');
+	('Nur Aida','Aida_Nur@gmail.com','123456aaaa', 'ROLE_ADMIN'),
+		 ('Rifky','RifkyW@gmail.com','Rifky','ROLE_ADMIN'),
+	  ('Aji','Aji@gmail.com','Aji','ROLE_ADMIN'),
+	  	  ('Alya','Alya@gmail.com','Alya','ROLE_ADMIN'),
+	  	  ('Andri','Andri@gmail.com','Andri','ROLE_ADMIN'),
+	  	  ('Uden','Uden@gmail.com','Uden','ROLE_ADMIN');	  
 
-INSERT INTO "Project".public.Users(username,email_id,password, roles)
+INSERT INTO public.Users(username,email_id,password, roles)
 VALUES
 	('Muh Toha','Tohaaa@gmail.com','98741252qwe', 'ROLE_CUSTOMER'),
 	('Lionel','Lionel@gmail.com','Rahasiaaaa4x1', 'ROLE_CUSTOMER'),
@@ -64,7 +69,7 @@ VALUES
     ('yohanness', 'yohannes@gmail', '555yohanness', 'ROLE_USER'),
     ('BayuIndra', 'Bayu@gmail', '555Bayuu', 'ROLE_USER');
 
-INSERT INTO "Project".public.Films(name,is_playing)
+INSERT INTO public.Films(name,is_playing)
 VALUES
 	('Jurassic World Dominion',true),
 	('The Roundup',true),
@@ -128,7 +133,7 @@ VALUES
     ('Suara Hati Istri', true),
     ('Siap 86', true);
 
-INSERT INTO "Project".public.Seats(seat_number,studio_name,is_available)
+INSERT INTO public.Seats(seat_number,studio_name,is_available)
 VALUES
 	(2,'A',true),
 	(2,'A',true),
@@ -181,7 +186,7 @@ VALUES
     (9,'E',true),
     (2,'E',true);
 
-INSERT INTO "Project".public.Schedules(film_id,date_show,show_start,show_end,price,seat_id)
+INSERT INTO public.Schedules(film_id,date_show,show_start,show_end,price,seat_id)
 VALUES
 	(1,'2022-06-19','18:00:00','19:00:00',35000,1),
 	(2,'2022-06-19','18:00:00','19:00:00',35000,2),
@@ -244,7 +249,7 @@ VALUES
     (1,'2022-08-08','05:00:00','07:00:00', 75000,11),
     (2,'2022-08-08','05:00:00','07:00:00',75000,12);
 
-INSERT INTO "Project".public.Reservation(user_id, schedule_id)
+INSERT INTO public.Reservation(user_id, schedule_id)
 values (5,5),
 		(6,3),
 		(4,4),
